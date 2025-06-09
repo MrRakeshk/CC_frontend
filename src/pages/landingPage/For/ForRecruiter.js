@@ -96,7 +96,7 @@ export default function ForRecruiter() {
               Applicant apply
             </h1>
             <p className="text-xl font-light">
-              Our JOBPORTAL community allows users to discover and apply for
+              Our Career Connect community allows users to discover and apply for
               jobs.
             </p>
           </div>
