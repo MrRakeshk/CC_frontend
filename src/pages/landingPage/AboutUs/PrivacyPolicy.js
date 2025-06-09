@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
         </h1>
 
         <p className="text-xl font-medium mb-10">
-          Last updated: 18 December, 2023
+          Last updated: 8 June, 2025
         </p>
         <p>
           JobPortal is responsible for the personal information about you that
