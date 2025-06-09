@@ -16,7 +16,7 @@ export default function Footer() {
             <Link className="flex pt-1" to="/">
               <img className="h-12 pb-2 " src={logo} alt="logo" />
               <h1 className="md:pl-2 pl-2 text-4xl text-black font-medium hover:opacity-60">
-                JobPortal
+                Career Connect
               </h1>
             </Link>
             <p className="md:w-80 w-full text-lg font-medium -mt-2 ">
@@ -133,7 +133,7 @@ export default function Footer() {
             <h1 className="text-2xl font-semibold">Follow us</h1>
             <a
               className="w-28 font-semibold text-lg"
-              href="https://www.instagram.com/kha_martin/"
+              href="https://www.instagram.com/mr_rakeshk1704/"
               target="_blank"
               rel="noreferrer"
             >
@@ -141,7 +141,7 @@ export default function Footer() {
             </a>
             <a
               className="w-28 opacity-80 hover:opacity-100 font-semibold text-lg"
-              href="https://github.com/Nhat-Kha"
+              href="https://github.com/MrRakeshk"
               target="_blank"
               rel="noreferrer"
             >
@@ -156,7 +156,7 @@ export default function Footer() {
             <Link className="flex pt-1" to="/">
               <img className="h-12 pb-2 " src={logo} alt="logo" />
               <h1 className="md:pl-2 pl-2 text-4xl text-black font-medium hover:opacity-60">
-                JobPortal
+                Career Connect
               </h1>
               <FontAwesomeIcon icon={faBlog} />
             </Link>
@@ -279,7 +279,7 @@ export default function Footer() {
           </div>
 
           <div className="w-full sm:w-1/5 md:w-2/5 flex flex-col space-y-2 pb-6">
-            <h1 className="text-2xl font-semibold">JobPortal</h1>
+            <h1 className="text-2xl font-semibold">Career Connect</h1>
 
             <Link
               className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg"
