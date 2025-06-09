@@ -4,7 +4,7 @@ import Home from "pages/landingPage/Home";
 import { React, createContext, useEffect, useState } from "react";
 import PrivacyPolicy from "pages/landingPage/AboutUs/PrivacyPolicy";
 import Navbar from "components/Navbar";
-import InfoBar from "components/InfoBar";
+//import InfoBar from "components/InfoBar";
 import ScrollToTop from "hooks/ScrollToTop";
 import Companies from "pages/landingPage/Companies";
 import Footer from "components/Footer";
