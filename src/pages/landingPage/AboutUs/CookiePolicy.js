@@ -30,7 +30,7 @@ export default function CookiePolicy() {
           </li>
           <li>
             Website refers to Greet, accessible from{" "}
-            <span className="font-semibold">jobportal-blush.vercel.app</span>
+            <span className="font-semibold">Career Connect.vercel.app</span>
           </li>
           <li>“You” means the individual accessing or using the Website.</li>
         </ul>
