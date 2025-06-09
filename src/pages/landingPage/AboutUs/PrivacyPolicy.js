@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
           Last updated: 8 June, 2025
         </p>
         <p>
-          JobPortal is responsible for the personal information about you that
+          Career Connect is responsible for the personal information about you that
           is processed on our website ( ). The following policy applies when you
           use our website. We are constantly working on improving our services
           therefore this policy can be changed in the future. The purpose of
