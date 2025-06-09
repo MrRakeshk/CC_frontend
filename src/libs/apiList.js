@@ -1,6 +1,6 @@
 export const server =
   "https://cc-backend-h5kh.onrender.com/api";
-  // "http://localhost:5000/api";
+  // "http://localhost:5001/api";
 
 const apiList = {
   login: `${server}/auth/login`,
