@@ -25,12 +25,12 @@ export default function Footer() {
 
             <a
               className="w-[220px] text-lg font-medium border-b-2 border-black hover:opacity-60"
-              href="mailto:nhatkha06299@gmail.com"
+              href="mailto:mrrakeshk1704@gmail.com"
             >
-              nhatkha06299@gmail.com
+              mrrakeshk1704@gmail.com
             </a>
             <span className="font-light">
-              Copyright © 2023 <span className="font-normal"> Nhat kha</span>{" "}
+              Copyright © 2023 <span className="font-normal">Jaswnth</span>{" "}
               Design.
             </span>
           </div>
