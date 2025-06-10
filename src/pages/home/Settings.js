@@ -169,8 +169,8 @@ export default function Settings() {
     formData.append("userId", profileDetails.userId);
     formData.append("name", profileDetails.name);
     console.log("select file: ", fileResume);
-    const result = await axios.post(apiList.uploadResume, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+    const result =await axios.post("/api/uploadResume/resume", formData, {
+  headers: { "Content-Type": "multipart/form-data" },
     });
     console.log(result);
   };
