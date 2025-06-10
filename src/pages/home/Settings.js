@@ -165,7 +165,7 @@ export default function Settings() {
   const uploadResume = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", fileResume);
+    formData.append("resume", fileResume);
     formData.append("userId", profileDetails.userId);
     formData.append("name", profileDetails.name);
     console.log("select file: ", fileResume);
