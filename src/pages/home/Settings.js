@@ -171,7 +171,7 @@ const handleResumeUpload = async (e) => {
   }
 
   try {
-    const result = await apiuploadResume(fileResume);
+    const result = await apiUploadResume(fileResume);
 
     console.log("Resume uploaded to Cloudinary:", result.secure_url);
     alert("Resume uploaded successfully!");
