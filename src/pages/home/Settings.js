@@ -163,33 +163,41 @@ export default function Settings() {
   };
   console.log("profileDetails", profileDetails);
 
- const uploadResume = async (e) => {
+const uploadResume = async (e) => {
   e.preventDefault();
 
   if (!fileResume) {
-    alert("Please select a resume file first.");
+    alert("Please select a PDF resume file.");
+    return;
+  }
+
+  if (fileResume.type !== "application/pdf") {
+    alert("Only PDF files are allowed.");
     return;
   }
 
   const formData = new FormData();
-  formData.append("resume", fileResume); // <-- This must match Multer's .single("resume")
-  formData.append("userId", profileDetails.userId); // Optional: send to backend
-  formData.append("name", profileDetails.name);     // Optional
+  formData.append("resume", fileResume); // Must match backend field name
 
   try {
-    console.log("Selected file: ", fileResume);
+    console.log("Uploading file:", fileResume.name);
 
-    const result = await axios.post(apiList.uploadResume, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const result = await axios.post(
+      apiList.uploadResume, // Make sure this points to: https://cc-backend-h5kh.onrender.com/api/uploadResume/resume
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
 
-    console.log("Upload successful:", result.data);
+    console.log("Upload success:", result.data);
     alert("Resume uploaded successfully!");
   } catch (error) {
-    console.error("Upload failed:", error.response?.data || error.message);
-    alert("Resume upload failed. Please try again.");
+    const err = error.response?.data?.error || error.message;
+    console.error("Upload failed:", err);
+    alert("Resume upload failed: " + err);
   }
 };
 
