@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import InputField from "components/InputField";
 import { apiUploadImages } from "libs/uploadImage";
 import { apiUploadResume } from "libs/uploadResume";
-import { apiUploadResume } from "../../api";
 import axios from "axios";
 import { SetPopupContext } from "App";
 import apiList from "../../libs/apiList";
