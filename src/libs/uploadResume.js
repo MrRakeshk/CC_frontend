@@ -5,7 +5,7 @@ export const apiUploadResume = (resume) =>
     try {
       const formData = new FormData();
       formData.append("file", resume); // PDF, DOC, etc.
-      formData.append("upload_preset", "your_upload_preset"); // ✅ your Cloudinary preset
+      formData.append("upload_preset", "Rakesh"); // ✅ your Cloudinary preset
       formData.append("cloud_name", "dvy6xbobi"); // ✅ your Cloudinary cloud name
       formData.append("resource_type", "raw"); // ✅ required for non-image files
 
