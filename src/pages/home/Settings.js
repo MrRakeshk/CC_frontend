@@ -163,18 +163,36 @@ export default function Settings() {
   };
   console.log("profileDetails", profileDetails);
 
-  const uploadResume = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("resume", fileResume);
-    formData.append("userId", profileDetails.userId);
-    formData.append("name", profileDetails.name);
-    console.log("select file: ", fileResume);
-    const result =await axios.post(apiList.uploadResume, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+ const uploadResume = async (e) => {
+  e.preventDefault();
+
+  if (!fileResume) {
+    alert("Please select a resume file first.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("resume", fileResume); // <-- This must match Multer's .single("resume")
+  formData.append("userId", profileDetails.userId); // Optional: send to backend
+  formData.append("name", profileDetails.name);     // Optional
+
+  try {
+    console.log("Selected file: ", fileResume);
+
+    const result = await axios.post(apiList.uploadResume, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
-    console.log(result);
-  };
+
+    console.log("Upload successful:", result.data);
+    alert("Resume uploaded successfully!");
+  } catch (error) {
+    console.error("Upload failed:", error.response?.data || error.message);
+    alert("Resume upload failed. Please try again.");
+  }
+};
+
 
   const handleChip = (newChips) => {
     setChips(newChips);
