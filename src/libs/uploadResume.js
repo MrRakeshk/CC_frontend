@@ -6,7 +6,7 @@ export const apiUploadResume = (resume) =>
       const formData = new FormData();
       formData.append("resume", resume); // PDF, DOC, etc.
       formData.append("upload_preset", "Rakesh"); // ✅ your Cloudinary preset
-      formData.append("cloud_name", "dvy6xbobi"); // ✅ your Cloudinary cloud name
+      formData.append("cloud_name", "dvy6xbobi"); // ✅ your Cloudinary cloud Name
       formData.append("resource_type", "raw"); // ✅ required for non-image files
 
       const response = await axios({
