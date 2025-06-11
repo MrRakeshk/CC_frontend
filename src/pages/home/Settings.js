@@ -162,9 +162,7 @@ export default function Settings() {
     }
   };
   console.log("profileDetails", profileDetails);
-const handleResumeUpload = async (e) => {
-  e.preventDefault();
-
+  
 const uploadResume = async (e) => {
   e.preventDefault();
 
