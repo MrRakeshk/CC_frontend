@@ -178,12 +178,13 @@ const uploadResume = async (e) => {
 
   const formData = new FormData();
   formData.append("resume", fileResume); // Must match backend field name
+  formData.append("userId", profileDetails.userId); // ✅ required to update MongoDB
 
   try {
     console.log("Uploading file:", fileResume.name);
 
     const result = await axios.post(
-      apiList.uploadResume, // Make sure this points to: https://cc-backend-h5kh.onrender.com/api/uploadResume/resume
+      apiList.uploadResume, // https://cc-backend-h5kh.onrender.com/api/uploadResume/resume
       formData,
       {
         headers: {
@@ -194,13 +195,26 @@ const uploadResume = async (e) => {
 
     console.log("Upload success:", result.data);
     alert("Resume uploaded successfully!");
+
+    // ✅ Update resume field in MongoDB
+    const resumeUrl = result.data?.url;
+    if (resumeUrl) {
+      setProfileDetails((prevDetails) => ({
+        ...prevDetails,
+        resume: resumeUrl,
+      }));
+
+      await axios.put(apiList.updateProfile, {
+        userId: profileDetails.userId,
+        resume: resumeUrl,
+      });
+    }
   } catch (error) {
     const err = error.response?.data?.error || error.message;
     console.error("Upload failed:", err);
     alert("Resume upload failed: " + err);
   }
 };
-
 
   const handleChip = (newChips) => {
     setChips(newChips);
