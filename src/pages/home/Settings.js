@@ -171,12 +171,12 @@ const handleResumeUpload = async (e) => {
   }
 
   try {
-    const result = await apiUploadResume(fileResume);
+    const result = await apiuploadResume(fileResume);
 
     console.log("Resume uploaded to Cloudinary:", result.secure_url);
     alert("Resume uploaded successfully!");
 
-    await axios.put("/api/user/update", {
+    await axios.put("https://cc-backend-h5kh.onrender.com/api/user/update", {
       userId: profileDetails.userId,
       resume: result.secure_url,
     });
