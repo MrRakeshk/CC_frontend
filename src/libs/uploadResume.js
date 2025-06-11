@@ -20,3 +20,4 @@ export const apiUploadResume = (resume) =>
       reject(error);
     }
   });
+
