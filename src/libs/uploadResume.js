@@ -4,10 +4,10 @@ export const apiUploadResume = (resume) =>
   new Promise(async (resolve, reject) => {
     try {
       const formData = new FormData();
-      formData.append("resume", resume); // PDF, DOC, etc.
-      formData.append("upload_preset", "Rakesh"); // ✅ your Cloudinary preset
-      formData.append("cloud_name", "dvy6xbobi"); // ✅ your Cloudinary cloud name
-      formData.append("resource_type", "raw"); // ✅ required for non-image files
+      formData.append("file", resume); // ✅ Must be 'file'
+      formData.append("upload_preset", "Rakesh"); // ✅ Your preset
+      formData.append("cloud_name", "dvy6xbobi"); // ✅ Your Cloudinary cloud name
+      formData.append("resource_type", "raw"); // ✅ Required for PDF, DOC, etc.
 
       const response = await axios({
         method: "POST",
@@ -15,7 +15,7 @@ export const apiUploadResume = (resume) =>
         data: formData,
       });
 
-      resolve(response);
+      resolve(response.data); // return only response data
     } catch (error) {
       reject(error);
     }
