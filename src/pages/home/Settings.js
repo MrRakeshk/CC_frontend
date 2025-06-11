@@ -162,53 +162,30 @@ export default function Settings() {
     }
   };
   console.log("profileDetails", profileDetails);
-
-const uploadResume = async (e) => {
+const handleResumeUpload = async (e) => {
   e.preventDefault();
 
-  if (!fileResume) {
-    alert("Please select a PDF resume file.");
+  if (!fileResume || fileResume.type !== "application/pdf") {
+    alert("Only PDF resumes are allowed.");
     return;
   }
-
-  if (fileResume.type !== "application/pdf") {
-    alert("Only PDF files are allowed.");
-    return;
-  }
-
-  console.log("Selected file:", fileResume); // ✅ Make sure this logs a valid File object
-
-  const formData = new FormData();
-  formData.append("resume", fileResume); // ✅ Make sure name matches backend multer field
 
   try {
-    console.log("Uploading file:", fileResume.name);
+    const result = await apiUploadResume(fileResume);
 
-    const result = await axios.post(
-      apiList.uploadResume, // ✅ Must be your backend endpoint
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    console.log("Upload success:", result.data);
+    console.log("Resume uploaded to Cloudinary:", result.secure_url);
     alert("Resume uploaded successfully!");
 
-    // ✅ Optional: Save uploaded link to user profile in MongoDB
     await axios.put("/api/user/update", {
       userId: profileDetails.userId,
-      resume: result.data.url,
+      resume: result.secure_url,
     });
-
-  } catch (error) {
-    const err = error.response?.data?.error || error.message;
-    console.error("Upload failed:", err);
-    alert("Resume upload failed: " + err);
+  } catch (err) {
+    console.error("Resume upload failed:", err);
+    alert("Upload failed: " + err.message);
   }
 };
+
 
 
   const handleChip = (newChips) => {
