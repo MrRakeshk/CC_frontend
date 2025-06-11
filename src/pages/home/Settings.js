@@ -197,6 +197,11 @@ const uploadResume = async (e) => {
 
     console.log("Upload success:", result.data);
     alert("Resume uploaded successfully!");
+    
+     await axios.put('/api/user/update', {
+      userId: profileDetails.userId,
+      resume: result.data.url,
+    });
   } catch (error) {
     const err = error.response?.data?.error || error.message;
     console.error("Upload failed:", err);
