@@ -176,17 +176,16 @@ const uploadResume = async (e) => {
     return;
   }
 
-  const formData = new FormData();
-  formData.append("resume", fileResume); // Must match backend field name
+  console.log("Selected file:", fileResume); // ✅ Make sure this logs a valid File object
 
-  // ✅ Add userId (assuming you have it in `profileDetails`)
-  formData.append("userId", profileDetails.userId); // <-- REQUIRED for DB update
+  const formData = new FormData();
+  formData.append("resume", fileResume); // ✅ Make sure name matches backend multer field
 
   try {
     console.log("Uploading file:", fileResume.name);
 
     const result = await axios.post(
-      apiList.uploadResume, // Ensure backend handles /resume
+      apiList.uploadResume, // ✅ Must be your backend endpoint
       formData,
       {
         headers: {
@@ -197,11 +196,13 @@ const uploadResume = async (e) => {
 
     console.log("Upload success:", result.data);
     alert("Resume uploaded successfully!");
-    
-     await axios.put('/api/user/update', {
+
+    // ✅ Optional: Save uploaded link to user profile in MongoDB
+    await axios.put("/api/user/update", {
       userId: profileDetails.userId,
       resume: result.data.url,
     });
+
   } catch (error) {
     const err = error.response?.data?.error || error.message;
     console.error("Upload failed:", err);
