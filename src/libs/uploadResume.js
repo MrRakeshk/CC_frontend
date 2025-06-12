@@ -4,7 +4,7 @@ export const apiUploadResume = (resumeFile) =>
   new Promise(async (resolve, reject) => {
     try {
       const formData = new FormData();
-      formData.append("file", url: resumeFile); // the resume file
+      formData.append("file", resumeFile); // the resume file
       formData.append("upload_preset", "Rakesh"); // your preset name
       formData.append("folder", "jobportal/resumes"); // for organized uploads
       formData.append("resource_type", "raw"); // because PDFs are raw files
