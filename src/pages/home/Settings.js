@@ -17,7 +17,7 @@ export default function Settings() {
   const [isLoading, setIsLoading] = useState(false);
   const [imagesPreview, setImagesPreview] = useState("");
   const [userData, setUserData] = useState();
-  const [fileResume, setresumeFile] = useState("");
+  const [resumeFile, setresumeFile] = useState("");
   const [open, setOpen] = useState(false);
   const [chips, setChips] = useState([]);
 
