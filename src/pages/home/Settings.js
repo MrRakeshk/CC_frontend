@@ -413,7 +413,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
   <input
     type="file"
     accept="application/pdf"
-    onChange={(e) => setResume(e.target.files[0])}
+    onChange={(e) => setFileResume(e.target.files[0])}
   />
               <button
                 type="submit"
