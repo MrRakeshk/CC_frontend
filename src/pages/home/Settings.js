@@ -196,21 +196,27 @@ const uploadResume = async (e) => {
 
     console.log("Upload success:", result.data);
     alert("Resume uploaded successfully!");
-const handleUpdate = async () => {
-  const token = localStorage.getItem("token"); // or use context or cookies if applicable
+const handleUpdate = async (resumeUrl) => {
+  const token = localStorage.getItem("token");
 
   if (!token) {
     console.error("No token found. User may not be logged in.");
     return;
   }
 
+  // 🔧 Step 1: Add resume URL to profileDetails before updating
+  const updatedProfile = {
+    ...profileDetails,
+    resume: resumeUrl, // ✅ Ensure this key matches your DB schema
+  };
+
   try {
     const response = await axios.put(
       "https://cc-backend-h5kh.onrender.com/api/user/update",
-      profileDetails, // make sure this has _id or userId if needed
+      updatedProfile,
       {
         headers: {
-          Authorization: `Bearer ${token}`, // Add token to header
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -219,8 +225,6 @@ const handleUpdate = async () => {
     console.error("Upload failed:", error);
   }
 };
-
-
   } catch (error) {
     const err = error.response?.data?.error || error.message;
     console.error("Upload failed:", err);
