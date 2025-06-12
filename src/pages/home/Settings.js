@@ -17,7 +17,7 @@ export default function Settings() {
   const [isLoading, setIsLoading] = useState(false);
   const [imagesPreview, setImagesPreview] = useState("");
   const [userData, setUserData] = useState();
-  const [fileResume, setFileResume] = useState("");
+  const [fileResume, setresumeFile] = useState("");
   const [open, setOpen] = useState(false);
   const [chips, setChips] = useState([]);
 
@@ -412,7 +412,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
   <input
     type="file"
     accept="application/pdf"
-    onChange={(e) => setFileResume(e.target.files[0])}
+    onChange={(e) => setresumeFile(e.target.files[0])}
   />
               <button
                 type="submit"
