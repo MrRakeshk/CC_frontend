@@ -166,21 +166,21 @@ export default function Settings() {
 const uploadResume = async (e) => {
   e.preventDefault();
 
-  if (!resume) {
+  if (!fileResume) {
     alert("Please select a PDF resume file.");
     return;
   }
 
-  if (resume.type !== "application/pdf") {
+  if (fileResume.type !== "application/pdf") {
     alert("Only PDF files are allowed.");
     return;
   }
 
   try {
-    console.log("Uploading to Cloudinary:", resume.name);
+    console.log("Uploading to Cloudinary:", fileResume.name);
 
     // ✅ Step 1: Upload to Cloudinary
-    const result = await apiUploadResume(resume);
+    const result = await apiUploadResume(fileResume);
     const resumeUrl = result.data?.secure_url;
 
     if (!resumeUrl) {
