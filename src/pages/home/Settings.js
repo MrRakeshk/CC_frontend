@@ -163,7 +163,7 @@ export default function Settings() {
   };
   console.log("profileDetails", profileDetails);
 
-  const uploadResume = async (e) => {
+const uploadResume = async (e) => {
   e.preventDefault();
 
   if (!resume) {
@@ -190,8 +190,8 @@ export default function Settings() {
 
     console.log("Cloudinary URL:", resumeUrl);
 
-    // ✅ Step 2: Update in MongoDB via your backend
-    await handleUpdate(resumeUrl);
+    // ✅ Step 2: Update resume URL in MongoDB
+    await handleResumeUpdate(resumeUrl);
     alert("Resume uploaded and profile updated successfully!");
   } catch (error) {
     console.error("Resume upload failed:", error);
@@ -199,7 +199,7 @@ export default function Settings() {
   }
 };
 
-const handleResumeUpdate = async (resumeUrl)=> {
+const handleResumeUpdate = async (resumeUrl) => {
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -209,7 +209,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
 
   const updatedProfile = {
     ...profileDetails,
-    resume: resumeUrl, // ✅ Make sure this matches your MongoDB schema
+    resume: resumeUrl, // ✅ Ensure this matches your MongoDB schema field
   };
 
   try {
@@ -218,7 +218,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
       updatedProfile,
       {
         headers: {
-          Authorization: `Bearer ${token}`, // ✅ Fixed missing backticks
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -227,6 +227,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
     console.error("MongoDB update failed:", error);
   }
 };
+
 
 
 
