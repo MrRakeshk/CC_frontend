@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const apiUploadResume = (resume) =>
+export const apiUploadResume = (fileResume) =>
   new Promise(async (resolve, reject) => {
     try {
       const formData = new FormData();
-      formData.append("file", resume); // 📄 PDF or DOC
+      formData.append("file", fileResume); // 📄 PDF or DOC
       formData.append("upload_preset", "Rakesh"); // ✅ your preset name
       formData.append("resource_type", "raw"); // ✅ for PDF/DOC
       formData.append("folder", "jobportal/resumes"); // ✅ optional but matches your asset folder
