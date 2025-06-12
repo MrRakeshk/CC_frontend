@@ -1,23 +1,24 @@
 import axios from "axios";
 
-export const apiUploadResume = (resume) =>
+export const apiUploadResume = (resumeFile) =>
   new Promise(async (resolve, reject) => {
     try {
       const formData = new FormData();
-      formData.append("file", resume); // PDF, DOC, etc.
-      formData.append("upload_preset", "Rakesh");
-      formData.append("cloud_name", "dvy6xbobi");
-      formData.append("resource_type", "raw");
+      formData.append("file", resumeFile); // 📄 PDF or DOC
+      formData.append("upload_preset", "Rakesh"); // ✅ your preset name
+      formData.append("resource_type", "raw"); // ✅ for PDF/DOC
+      formData.append("folder", "jobportal/resumes"); // ✅ optional but matches your asset folder
 
       const response = await axios({
         method: "POST",
-        url: "https://api.cloudinary.com/v1_1/dvy6xbobi/raw/upload", // ✅ fixed here
+        url: "https://api.cloudinary.com/v1_1/dvy6xbobi/raw/upload",
         data: formData,
       });
 
-      resolve(response);
+      resolve(response); // ✅ returns { secure_url, etc. }
     } catch (error) {
       reject(error);
     }
   });
+
 
