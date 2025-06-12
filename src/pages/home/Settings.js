@@ -218,7 +218,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
       updatedProfile,
       {
         headers: {
-          Authorization: Bearer ${token}, // ✅ Fixed missing backticks
+          Authorization: 'Bearer ${token},'// ✅ Fixed missing backticks
         },
       }
     );
