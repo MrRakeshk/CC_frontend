@@ -163,6 +163,8 @@ export default function Settings() {
   };
   console.log("profileDetails", profileDetails);
 
+const [resume, setResume] = useState(null);
+
 const uploadResume = async (e) => {
   e.preventDefault();
 
@@ -179,7 +181,6 @@ const uploadResume = async (e) => {
   try {
     console.log("Uploading to Cloudinary:", resume.name);
 
-    // ✅ Step 1: Upload to Cloudinary
     const result = await apiUploadResume(resume);
     const resumeUrl = result.data?.secure_url;
 
@@ -190,8 +191,7 @@ const uploadResume = async (e) => {
 
     console.log("Cloudinary URL:", resumeUrl);
 
-    // ✅ Step 2: Update in MongoDB via your backend
-    await handleUpdate(resumeUrl);
+    await handleResumeUpdate(resumeUrl);
     alert("Resume uploaded and profile updated successfully!");
   } catch (error) {
     console.error("Resume upload failed:", error);
@@ -199,7 +199,7 @@ const uploadResume = async (e) => {
   }
 };
 
-const handleResumeUpdate = async (resumeUrl)=> {
+const handleResumeUpdate = async (resumeUrl) => {
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -209,7 +209,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
 
   const updatedProfile = {
     ...profileDetails,
-    resume: resumeUrl, // ✅ Make sure this matches your MongoDB schema
+    resume: resumeUrl,
   };
 
   try {
@@ -218,7 +218,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
       updatedProfile,
       {
         headers: {
-          Authorization: Bearer ${token}, // ✅ Fixed missing backticks
+          Authorization: `Bearer ${token}`,
         },
       }
     );
