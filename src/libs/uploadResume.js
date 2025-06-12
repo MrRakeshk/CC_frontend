@@ -1,18 +1,18 @@
 import axios from "axios";
 
-export const apiUploadResume = (fileResume) =>
+export const apiUploadResume = (resumeFile) =>
   new Promise(async (resolve, reject) => {
     try {
       const formData = new FormData();
-      formData.append("file", fileResume); // the resume file
+      formData.append("file", url: resumeFile); // the resume file
       formData.append("upload_preset", "Rakesh"); // your preset name
       formData.append("folder", "jobportal/resumes"); // for organized uploads
       formData.append("resource_type", "raw"); // because PDFs are raw files
 
 
-      const response = await axios({
+     const response = await axios({
         method: "POST",
-        url: "https://api.cloudinary.com/v1_1/dvy6xbobi/raw/upload",
+        url: "https://api.cloudinary.com/v1_1/dvy6xbobi/raw/upload", // ✅ raw upload
         data: formData,
       });
 
