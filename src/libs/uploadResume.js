@@ -4,22 +4,21 @@ export const apiUploadResume = (resume) =>
   new Promise(async (resolve, reject) => {
     try {
       const formData = new FormData();
-      formData.append("file", resume); // the resume file
-      formData.append("upload_preset", "Rakesh"); // your preset name
-      formData.append("folder", "jobportal/resumes"); // for organized uploads
-      formData.append("resource_type", "raw"); // because PDFs are raw files
-
+      formData.append("file", resume);                         // ✅ Correct
+      formData.append("upload_preset", "Rakesh");              // ✅ Ensure this preset exists in Cloudinary
+      formData.append("folder", "jobportal/resumes");          // ✅ Organized structure
+      // ❌ This line is not needed here
+      // formData.append("resource_type", "raw");
 
       const response = await axios({
         method: "POST",
-        url: "https://api.cloudinary.com/v1_1/dvy6xbobi/raw/upload",
+        url: "https://api.cloudinary.com/v1_1/dvy6xbobi/raw/upload", // ✅ Correct URL for raw uploads (PDFs)
         data: formData,
       });
 
-      resolve(response); // ✅ returns { secure_url, etc. }
+      resolve(response);
     } catch (error) {
       reject(error);
     }
   });
-
 
