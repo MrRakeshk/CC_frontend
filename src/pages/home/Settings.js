@@ -213,13 +213,6 @@ const uploadResume = async (e) => {
   setIsLoading(false);
 };
 
-  } catch (error) {
-    const err = error.response?.data?.error || error.message;
-    console.error("Upload failed:", err);
-    alert("Resume upload failed: " + err);
-  }
-};
-
   const handleChip = (newChips) => {
     setChips(newChips);
   };
