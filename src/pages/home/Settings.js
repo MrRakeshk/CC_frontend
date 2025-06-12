@@ -182,6 +182,7 @@ export default function Settings() {
     // ✅ Step 1: Upload to Cloudinary
     const result = await apiUploadResume(fileResume);
     const resumeUrl = result.data?.secure_url;
+    console.log(resumeUrl);
 
     if (!resumeUrl) {
       alert("Failed to get resume URL from Cloudinary.");
