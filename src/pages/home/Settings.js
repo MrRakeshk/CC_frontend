@@ -199,7 +199,7 @@ export default function Settings() {
   }
 };
 
-const handleResumeUpdate(resumeUrl);=> {
+const handleResumeUpdate = async (resumeUrl)=> {
   const token = localStorage.getItem("token");
 
   if (!token) {
