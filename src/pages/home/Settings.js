@@ -164,67 +164,55 @@ export default function Settings() {
   console.log("profileDetails", profileDetails);
   
 const uploadResume = async (e) => {
-  e.preventDefault();
+  e.stopPropagation();
+  setIsLoading(true);
 
-  if (!fileResume) {
-    alert("Please select a PDF resume file.");
-    return;
-  }
+  const files = e.target.files;
+  let resumeUrl = "";
 
-  if (fileResume.type !== "application/pdf") {
-    alert("Only PDF files are allowed.");
-    return;
-  }
+  if (files && files.length > 0) {
+    try {
+      for (let file of files) {
+        // 📤 Uploading to Cloudinary using your API wrapper
+        const response = await apiUploadResume(file);
 
-  console.log("Selected file:", fileResume); // ✅ Make sure this logs a valid File object
-
-  const formData = new FormData();
-  formData.append("resume", fileResume); // ✅ Make sure name matches backend multer field
-
-  try {
-    console.log("Uploading file:", fileResume.name);
-
-    const result = await axios.post(
-      apiList.uploadResume, // ✅ Must be your backend endpoint
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        if (response.status === 200) {
+          resumeUrl = response.data?.secure_url;
+          console.log("Resume URL:", resumeUrl);
+        }
       }
-    );
 
-    console.log("Upload success:", result.data);
-    alert("Resume uploaded successfully!");
-const handleUpdate = async (resumeUrl) => {
-  const token = localStorage.getItem("token");
+      // 🧠 Update profileDetails state with resume URL
+      setProfileDetails((prevDetails) => ({
+        ...prevDetails,
+        resume: resumeUrl,
+      }));
 
-  if (!token) {
-    console.error("No token found. User may not be logged in.");
-    return;
+      setPopup({
+        open: true,
+        icon: "success",
+        message: "Resume uploaded successfully!",
+      });
+    } catch (error) {
+      console.error("Resume upload failed:", error);
+      setPopup({
+        open: true,
+        icon: "error",
+        message: "Failed to upload resume.",
+      });
+    }
+  } else {
+    console.log("No file selected");
+    setPopup({
+      open: true,
+      icon: "error",
+      message: "Please select a resume file",
+    });
   }
 
-  // 🔧 Step 1: Add resume URL to profileDetails before updating
-  const updatedProfile = {
-    ...profileDetails,
-    resume: resumeUrl, // ✅ Ensure this key matches your DB schema
-  };
-
-  try {
-    const response = await axios.put(
-      "https://cc-backend-h5kh.onrender.com/api/user/update",
-      updatedProfile,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log("Upload success:", response.data);
-  } catch (error) {
-    console.error("Upload failed:", error);
-  }
+  setIsLoading(false);
 };
+
   } catch (error) {
     const err = error.response?.data?.error || error.message;
     console.error("Upload failed:", err);
