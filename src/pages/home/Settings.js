@@ -162,56 +162,74 @@ export default function Settings() {
     }
   };
   console.log("profileDetails", profileDetails);
-  
-const uploadResume = async (e) => {
-  e.stopPropagation();
-  setIsLoading(true);
 
-  const files = e.target.files;
-  let resumeUrl = "";
+  const uploadResume = async (e) => {
+  e.preventDefault();
 
-  if (files && files.length > 0) {
-    try {
-      for (let file of files) {
-        // 📤 Uploading to Cloudinary using your API wrapper
-        const response = await apiUploadResume(file);
-
-        if (response.status === 200) {
-          resumeUrl = response.data?.secure_url;
-          console.log("Resume URL:", resumeUrl);
-        }
-      }
-
-      // 🧠 Update profileDetails state with resume URL
-      setProfileDetails((prevDetails) => ({
-        ...prevDetails,
-        resume: resumeUrl,
-      }));
-
-      setPopup({
-        open: true,
-        icon: "success",
-        message: "Resume uploaded successfully!",
-      });
-    } catch (error) {
-      console.error("Resume upload failed:", error);
-      setPopup({
-        open: true,
-        icon: "error",
-        message: "Failed to upload resume.",
-      });
-    }
-  } else {
-    console.log("No file selected");
-    setPopup({
-      open: true,
-      icon: "error",
-      message: "Please select a resume file",
-    });
+  if (!fileResume) {
+    alert("Please select a PDF resume file.");
+    return;
   }
 
-  setIsLoading(false);
+  if (fileResume.type !== "application/pdf") {
+    alert("Only PDF files are allowed.");
+    return;
+  }
+
+  try {
+    console.log("Uploading to Cloudinary:", fileResume.name);
+
+    // ✅ Step 1: Upload to Cloudinary
+    const result = await apiUploadResume(fileResume);
+    const resumeUrl = result.data?.secure_url;
+
+    if (!resumeUrl) {
+      alert("Failed to get resume URL from Cloudinary.");
+      return;
+    }
+
+    console.log("Cloudinary URL:", resumeUrl);
+
+    // ✅ Step 2: Update in MongoDB via your backend
+    await handleUpdate(resumeUrl);
+    alert("Resume uploaded and profile updated successfully!");
+  } catch (error) {
+    console.error("Resume upload failed:", error);
+    alert("Resume upload failed.");
+  }
 };
+
+const handleUpdate = async (resumeUrl) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    console.error("No token found. User may not be logged in.");
+    return;
+  }
+
+  const updatedProfile = {
+    ...profileDetails,
+    resume: resumeUrl, // ✅ Make sure this matches your MongoDB schema
+  };
+
+  try {
+    const response = await axios.put(
+      "https://cc-backend-h5kh.onrender.com/api/user/update",
+      updatedProfile,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ Fixed missing backticks
+        },
+      }
+    );
+    console.log("MongoDB updated:", response.data);
+  } catch (error) {
+    console.error("MongoDB update failed:", error);
+  }
+};
+
+
+
 
   const handleChip = (newChips) => {
     setChips(newChips);
