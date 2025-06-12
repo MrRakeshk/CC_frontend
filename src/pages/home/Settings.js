@@ -409,12 +409,12 @@ const handleResumeUpdate = async (resumeUrl) => {
             <h2 className="font-semibold text-xl py-4">
               Resume <span className="text-red-500">*</span>
             </h2>
-            <form onSubmit={uploadResume}>
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => setFileResume(e.target.files[0])}
-              />
+           <form onSubmit={uploadResume}>
+  <input
+    type="file"
+    accept="application/pdf"
+    onChange={(e) => setResume(e.target.files[0])}
+  />
               <button
                 type="submit"
                 className="hover:opacity-80  cursor-pointer items-center font-semibold text-md justify-center px-8 py-3 bg-primary rounded-xl text-black"
