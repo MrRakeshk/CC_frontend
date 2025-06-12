@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const apiUploadResume = (resumeFile) =>
+export const apiUploadResume = (resume) =>
   new Promise(async (resolve, reject) => {
     try {
       const formData = new FormData();
