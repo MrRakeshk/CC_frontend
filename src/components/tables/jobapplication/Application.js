@@ -23,49 +23,51 @@ const ApplicationTile = (props) => {
   };
 
   const getResume = () => {
-    if (
-      application.jobApplicant.resume &&
-      application.jobApplicant.resume !== ""
-    ) {
-      const address = `${apiList.downloadResume}/${application.jobApplicant._id}`;
-      console.log(address);
-      axios(address, {
-        method: "GET",
-        responseType: "blob",
-      })
-        .then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute(
-            "download",
-            `resume-${application.jobApplicant.name}.pdf`
-          );
-          document.body.appendChild(link);
-          link.click();
-          window.URL.revokeObjectURL(url);
-          setPopup({
-            open: true,
-            icon: "success",
-            message: "Download file PDF successfully",
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-          setPopup({
-            open: true,
-            icon: "error",
-            message: "Error",
-          });
+  if (
+    application.jobApplicant.resume &&
+    application.jobApplicant.resume !== ""
+  ) {
+    const address = `${apiList.downloadResume}/${application.jobApplicant._id}`;
+    console.log(address);
+
+    axios(address, {
+      method: "GET",
+      responseType: "blob",
+    })
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute(
+          "download",
+          `resume-${application.jobApplicant.name}.pdf`
+        );
+        document.body.appendChild(link);
+        link.click();
+        window.URL.revokeObjectURL(url);
+        setPopup({
+          open: true,
+          icon: "success",
+          message: "Download file PDF successfully",
         });
-    } else {
-      setPopup({
-        open: true,
-        icon: "error",
-        message: "No resume found",
+      })
+      .catch((error) => {
+        console.log("Download error", error);
+        setPopup({
+          open: true,
+          icon: "error",
+          message: "Error downloading resume",
+        });
       });
-    }
-  };
+  } else {
+    setPopup({
+      open: true,
+      icon: "error",
+      message: "No resume found",
+    });
+  }
+};
+
 
   const updateStatus = (status) => {
     console.log(`Update status: ${status}`);
