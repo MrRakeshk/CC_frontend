@@ -189,20 +189,7 @@ const uploadResume = async (e) => {
     }
 
     console.log("Cloudinary URL:", resumeUrl);
-
-const uploadResume = async (e) => {
-  e.preventDefault();
-
-  if (!fileResume) {
-    alert("Please select a resume file.");
-    return;
-  }
-
-  try {
-    const resumeUrl = await apiUploadResume(fileResume); // ✅ cloud upload
-    console.log("Resume uploaded:", resumeUrl);
-
-    // ✅ fix the function name here:
+// ✅ fix the function name here:
     await handleResumeUpdate(resumeUrl);
 
     alert("Resume uploaded and profile updated successfully!");
