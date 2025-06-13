@@ -10,7 +10,7 @@ export const apiUploadResume = (resumeFile) =>
       formData.append("resource_type", "raw");
 
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dvy6xbobi/raw/upload",
+        "https://api.cloudinary.com/v1_1/dvy6xbobi/upload",
         formData
       );
 
