@@ -181,7 +181,10 @@ const uploadResume = async (e) => {
 
     // ✅ Step 1: Upload to Cloudinary
     const result = await apiUploadResume(FileResume);
-    const resumeUrl = result.secure_url;
+
+    console.log("Full Cloudinary response:", result);
+
+    const resumeUrl = result?.secure_url;
 
     if (!resumeUrl) {
       alert("Failed to get resume URL from Cloudinary.");
@@ -189,7 +192,8 @@ const uploadResume = async (e) => {
     }
 
     console.log("Cloudinary URL:", resumeUrl);
-// ✅ fix the function name here:
+
+    // ✅ Step 2: Update user profile in MongoDB
     await handleResumeUpdate(resumeUrl);
 
     alert("Resume uploaded and profile updated successfully!");
@@ -198,7 +202,6 @@ const uploadResume = async (e) => {
     alert("Resume upload failed.");
   }
 };
-
 const handleResumeUpdate = async (resumeUrl) => {
   const token = localStorage.getItem("token");
 
