@@ -181,7 +181,7 @@ const uploadResume = async (e) => {
 
     // ✅ Step 1: Upload to Cloudinary
     const result = await apiUploadResume(FileResume);
-    const resumeUrl = result.data?.secure_url;
+    const resumeUrl = result.secure_url;
 
     if (!resumeUrl) {
       alert("Failed to get resume URL from Cloudinary.");
