@@ -22,51 +22,41 @@ const ApplicationTile = (props) => {
     finished: "#4EA5D9",
   };
 
-  const getResume = () => {
+ const getResume = () => {
   if (
     application.jobApplicant.resume &&
     application.jobApplicant.resume !== ""
   ) {
-    const address = `${apiList.downloadResume}/${application.jobApplicant._id}`;
-    console.log(address);
+    // Ensure URL ends with ?fl_attachment=true
+    let resumeUrl = application.jobApplicant.resume;
+    if (!resumeUrl.includes("fl_attachment=true")) {
+      resumeUrl += "?fl_attachment=true";
+    }
 
-    axios(address, {
-      method: "GET",
-      responseType: "blob",
-    })
-      .then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute(
-          "download",
-          `resume-${application.jobApplicant.name}.pdf`
-        );
-        document.body.appendChild(link);
-        link.click();
-        window.URL.revokeObjectURL(url);
-        setPopup({
-          open: true,
-          icon: "success",
-          message: "Download file PDF successfully",
-        });
-      })
-      .catch((error) => {
-        console.log("Download error", error);
-        setPopup({
-          open: true,
-          icon: "error",
-          message: "Error downloading resume",
-        });
-      });
+    const link = document.createElement("a");
+    link.href = resumeUrl;
+    link.setAttribute(
+      "download",
+      `resume-${application.jobApplicant.name || "user"}.pdf`
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setPopup({
+      open: true,
+      icon: "success",
+      message: "Resume download started successfully.",
+    });
   } else {
     setPopup({
       open: true,
       icon: "error",
-      message: "No resume found",
+      message: "No resume found for this applicant.",
     });
   }
 };
+
 
 
   const updateStatus = (status) => {
