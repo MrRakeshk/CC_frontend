@@ -16,8 +16,9 @@ export const apiUploadResume = (resumeFile) =>
         data: formData,
       });
 
-      return response;
-    } catch (error) {
-      reject(error);
+    return response.data; // ✅ FIXED
+  } catch (error) {
+    console.error("Cloudinary upload error:", error.response?.data || error);
+    throw error;
     }
   });
