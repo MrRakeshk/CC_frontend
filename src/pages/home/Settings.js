@@ -190,8 +190,21 @@ const uploadResume = async (e) => {
 
     console.log("Cloudinary URL:", resumeUrl);
 
-    // ✅ Step 2: Update in MongoDB via your backend
-    await handleUpdate(resumeUrl);
+const uploadResume = async (e) => {
+  e.preventDefault();
+
+  if (!fileResume) {
+    alert("Please select a resume file.");
+    return;
+  }
+
+  try {
+    const resumeUrl = await apiUploadResume(fileResume); // ✅ cloud upload
+    console.log("Resume uploaded:", resumeUrl);
+
+    // ✅ fix the function name here:
+    await handleResumeUpdate(resumeUrl);
+
     alert("Resume uploaded and profile updated successfully!");
   } catch (error) {
     console.error("Resume upload failed:", error);
@@ -209,7 +222,7 @@ const handleResumeUpdate = async (resumeUrl) => {
 
   const updatedProfile = {
     ...profileDetails,
-    resume: resumeUrl, // ✅ Make sure this matches your MongoDB schema
+    resume: resumeUrl, // ✅ field matches MongoDB schema
   };
 
   try {
@@ -218,7 +231,7 @@ const handleResumeUpdate = async (resumeUrl) => {
       updatedProfile,
       {
         headers: {
-          Authorization: `Bearer ${token}`, // ✅ Fixed missing backticks
+          Authorization: `Bearer ${token}`, // ✅ backticks used
         },
       }
     );
@@ -227,6 +240,7 @@ const handleResumeUpdate = async (resumeUrl) => {
     console.error("MongoDB update failed:", error);
   }
 };
+
 
 
 
