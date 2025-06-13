@@ -17,7 +17,7 @@ export default function Settings() {
   const [isLoading, setIsLoading] = useState(false);
   const [imagesPreview, setImagesPreview] = useState("");
   const [userData, setUserData] = useState();
-  const [resumeFile, setresumeFile] = useState("");
+  const [FileResume, setFileResume] = useState("");
   const [open, setOpen] = useState(false);
   const [chips, setChips] = useState([]);
 
@@ -166,18 +166,18 @@ export default function Settings() {
 const uploadResume = async (e) => {
   e.preventDefault();
 
-  if (!resumeFile) {
+  if (!FileResume) {
     alert("Please select a PDF resume file.");
     return;
   }
 
-  if (resumeFile.type !== "application/pdf") {
+  if (FileResume.type !== "application/pdf") {
     alert("Only PDF files are allowed.");
     return;
   }
 
   try {
-    console.log("Uploading to Cloudinary:", resumeFile.name);
+    console.log("Uploading to Cloudinary:", FileResume.name);
 
     // ✅ Step 1: Upload to Cloudinary
     const result = await apiUploadResume(resumeFile);
@@ -408,12 +408,12 @@ const handleResumeUpdate = async (resumeUrl)=> {
             <h2 className="font-semibold text-xl py-4">
               Resume <span className="text-red-500">*</span>
             </h2>
-           <form onSubmit={uploadResume}>
-  <input
-    type="file"
-    accept="application/pdf"
-    onChange={(e) => setresumeFile(e.target.files[0])}
-  />
+              <form onSubmit={uploadResume}>
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={(e) => setFileResume(e.target.files[0])}
+              /> 
               <button
                 type="submit"
                 className="hover:opacity-80  cursor-pointer items-center font-semibold text-md justify-center px-8 py-3 bg-primary rounded-xl text-black"
