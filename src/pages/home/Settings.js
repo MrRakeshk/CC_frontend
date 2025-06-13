@@ -199,7 +199,7 @@ const uploadResume = async (e) => {
   }
 };
 
-const handleResumeUpdate = async (resumeUrl)=> {
+const handleResumeUpdate = async (resumeUrl) => {
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -227,6 +227,7 @@ const handleResumeUpdate = async (resumeUrl)=> {
     console.error("MongoDB update failed:", error);
   }
 };
+
 
 
 
