@@ -5,7 +5,6 @@ export const apiUploadResume = (resumeFile) =>
     try {
       const formData = new FormData();
       formData.append("file", resumeFile); // ✅ Correct variable
-
       formData.append("upload_preset", "Rakesh"); // ✅ Preset must be created in Cloudinary
       formData.append("folder", "jobportal/resumes");
       formData.append("resource_type", "raw");
