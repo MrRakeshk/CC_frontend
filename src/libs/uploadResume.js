@@ -16,7 +16,7 @@ export const apiUploadResume = (resumeFile) =>
         data: formData,
       });
 
-      resolve(response.data.secure_url);
+      return response;
     } catch (error) {
       reject(error);
     }
