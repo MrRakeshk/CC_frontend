@@ -25,36 +25,6 @@ export default function OTPInput() {
       .catch(console.log);
   }
 
-  // const verifyOTP = async () => {
-  //   try {
-  //     // Gọi API backend để kiểm tra xác nhận OTP
-  //     const response = await axios.post(
-  //       apiList.OTP,
-  //       {
-  //         email: localStorage.getItem("email"),
-  //         // enteredOTP: localStorage.getItem("otp").trim().split(""),
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     if (response.data.success) {
-  //       alert(
-  //         "Verification successful. You can proceed with the registration."
-  //       );
-  //       history("/reset-recovered");
-  //     } else {
-  //       alert("Verification failed. Please check your OTP and try again.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error verifying OTP:", error);
-  //     alert("Error verifying OTP. Please try again.");
-  //   }
-  // };
-  // console.log("Entered OTP: ", localStorage.getItem("otp").trim().split(""));
 
   useEffect(() => {
     let interval = setInterval(() => {
