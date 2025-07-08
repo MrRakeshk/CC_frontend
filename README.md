@@ -48,31 +48,7 @@ CareerConnect connects **job seekers** with **recruiters** through a modern, res
 - 🔼 **Frontend:** [Vercel](https://vercel.com)
 - 🔼 **Backend:** (Add your backend deployment info here if hosted)
 
----
 
-## 📁 Folder Structure (Frontend)
-
-src/
-├── components/
-│ ├── JobCard.jsx
-│ ├── ResumeUploader.jsx
-│ └── ...
-├── pages/
-│ ├── Home.jsx
-│ ├── RecruiterDashboard.jsx
-│ ├── ApplicantDashboard.jsx
-│ └── ...
-├── services/
-│ └── api.js
-├── App.jsx
-├── main.jsx
-└── index.css
-
-yaml
-Copy
-Edit
-
----
 
 ## 🚧 Setup Instructions
 
@@ -97,7 +73,5 @@ Install dependencies and run node index.js or npm run dev
 
 Ensure MongoDB is connected
 
-👨‍💻 Contributors
-Rakesh K
-
-Charulatha M
+👨‍💻 Team Members
+Rakesh K, Charulatha M
